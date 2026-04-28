@@ -1,0 +1,518 @@
+{
+  "name": "Entra",
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "user-onboard",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2.1,
+      "position": [
+        -560,
+        -32
+      ],
+      "id": "d3c0904d-260c-42cf-9ad9-cdc9b54cf29b",
+      "name": "Webhook",
+      "webhookId": "60d5637a-bbe3-469f-94e9-624f613d468d"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "loose",
+            "version": 3
+          },
+          "conditions": [
+            {
+              "id": "da7a2d91-2fa1-44f5-98f0-bc5ff277590d",
+              "leftValue": "={{ $json.body.department }}",
+              "rightValue": "=IT",
+              "operator": {
+                "type": "string",
+                "operation": "equals"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "looseTypeValidation": true,
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.3,
+      "position": [
+        -144,
+        -32
+      ],
+      "id": "d34ee050-14a4-44ad-af3b-c56e4f4d440e",
+      "name": "If"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "loose",
+            "version": 3
+          },
+          "conditions": [
+            {
+              "id": "2f6029a7-09f7-473b-a047-1a48901b1061",
+              "leftValue": "={{ $json.body.department }}",
+              "rightValue": "HR",
+              "operator": {
+                "type": "string",
+                "operation": "equals"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "looseTypeValidation": true,
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.3,
+      "position": [
+        0,
+        128
+      ],
+      "id": "f2db2de0-fdf4-4a09-9d37-5937ef698010",
+      "name": "If1"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "44e1334e-5811-4e80-b8b5-2fbdbe926141",
+              "name": "role",
+              "value": "LIMITED_USER",
+              "type": "string"
+            },
+            {
+              "id": "270cb766-5c8b-48a1-92ca-f8093cad6d2a",
+              "name": "group",
+              "value": "General",
+              "type": "string"
+            }
+          ]
+        },
+        "includeOtherFields": "",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        208,
+        272
+      ],
+      "id": "a50802fc-d981-4954-9ee4-7a3d6d21d343",
+      "name": "Edit Fields3"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "68b95fe6-b4a0-41b5-b57a-864ce78a9e90",
+              "name": "body.name",
+              "value": "={{ $json.body.name }}",
+              "type": "string"
+            },
+            {
+              "id": "8f849f8a-686a-4224-92f5-433bab07e436",
+              "name": "body.email",
+              "value": "={{ $json.body.email }}",
+              "type": "string"
+            },
+            {
+              "id": "dbcee46d-1a10-4f93-a395-d06a75537d66",
+              "name": "body.department",
+              "value": "={{ $json.body.department }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        -352,
+        -32
+      ],
+      "id": "8426f334-4e8d-4acd-8f7e-32f44de88252",
+      "name": "Normalization Output"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "6c3d8ded-6bb1-416c-9cac-d754109400dd",
+              "name": "role",
+              "value": "IT_ADMIN",
+              "type": "string"
+            },
+            {
+              "id": "5f212f2c-553e-411d-a61d-0f2295ee46f0",
+              "name": "group",
+              "value": "IT-Team",
+              "type": "string"
+            }
+          ]
+        },
+        "includeOtherFields": true,
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        64,
+        -128
+      ],
+      "id": "3c0494f4-0488-4de4-88f0-b0bd8768ce51",
+      "name": "Assign IT Role"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "1b1e30cc-cf48-498c-97cc-ad3c18939a14",
+              "name": "role",
+              "value": "HR_USER",
+              "type": "string"
+            },
+            {
+              "id": "27407255-d7af-4a1c-b69c-7be137bcdc03",
+              "name": "group",
+              "value": "HR-Team",
+              "type": "string"
+            }
+          ]
+        },
+        "includeOtherFields": true,
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        208,
+        48
+      ],
+      "id": "d992ea74-8a2a-4bb0-b027-368d185d74d4",
+      "name": "Assign HR Role"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://graph.microsoft.com/v1.0/users",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpBasicAuth",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"accountEnabled\": true,\n  \"displayName\": \"{{$json.body.name}}\",\n  \"mailNickname\": \"{{$json.body.name}}\",\n  \"userPrincipalName\": \"{{$json.body.email}}\",\n  \"passwordProfile\": {\n    \"forceChangePasswordNextSignIn\": true,\n    \"password\": \"Temp@12345\"\n  }\n}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.4,
+      "position": [
+        240,
+        -128
+      ],
+      "id": "8ecdae84-6f8f-4e00-a0e1-7316f633435f",
+      "name": "HTTP Request",
+      "credentials": {
+        "oAuth2Api": {
+          "id": "plAO0utGk5L4f0tW",
+          "name": "Entra"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://graph.microsoft.com/v1.0/users",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"accountEnabled\": true,\n  \"displayName\": \"{{$json.body.name}}\",\n  \"mailNickname\": \"{{$json.body.name}}\",\n  \"userPrincipalName\": \"{{$json.body.email}}\",\n  \"passwordProfile\": {\n    \"forceChangePasswordNextSignIn\": true,\n    \"password\": \"Temp@12345\"\n  }\n}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.4,
+      "position": [
+        368,
+        48
+      ],
+      "id": "387352a9-65c0-4e6e-9aa8-e9e6204af101",
+      "name": "HTTP Request1"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://graph.microsoft.com/v1.0/groups/4e9f3f32-3890-408d-b2f5-acba477fbdca/members/$ref",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"@odata.id\": \"https://graph.microsoft.com/v1.0/directoryObjects/{{ $json.id }}\"\n}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.4,
+      "position": [
+        576,
+        48
+      ],
+      "id": "58beb726-7f17-4a02-9e68-5f071e7e45c3",
+      "name": "HTTP Request3"
+    },
+    {
+      "parameters": {
+        "amount": 7
+      },
+      "type": "n8n-nodes-base.wait",
+      "typeVersion": 1.1,
+      "position": [
+        784,
+        48
+      ],
+      "id": "4b5a768e-f388-4f55-86e4-5cfd8f24bb67",
+      "name": "Wait1",
+      "webhookId": "e0265b9b-7b45-45e6-ba6b-866e19e3d5e6"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "=https://graph.microsoft.com/v1.0/groups/51a28e30-3a46-4c0f-84f9-3845ab32f11c/members/$ref",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"@odata.id\": \"https://graph.microsoft.com/v1.0/directoryObjects/{{$json.id}}\"\n}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.4,
+      "position": [
+        448,
+        -128
+      ],
+      "id": "11e28e40-43ce-4e44-98b8-ad79a91ae06b",
+      "name": "makepost"
+    },
+    {
+      "parameters": {
+        "amount": 7
+      },
+      "type": "n8n-nodes-base.wait",
+      "typeVersion": 1.1,
+      "position": [
+        656,
+        -128
+      ],
+      "id": "6a0065ef-079f-47f9-b55c-48fd648b01f7",
+      "name": "Wait",
+      "webhookId": "6b77e1b4-0290-43c9-a126-960e91052572"
+    },
+    {
+      "parameters": {
+        "method": "PATCH",
+        "url": "=https://graph.microsoft.com/v1.0/users/{{$node[\"HTTP Request\"].json.id}}",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "{\n  \"accountEnabled\": false\n}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.4,
+      "position": [
+        864,
+        -128
+      ],
+      "id": "39e5872c-5c16-429b-920b-976261db814d",
+      "name": "HTTP Request2"
+    },
+    {
+      "parameters": {
+        "method": "PATCH",
+        "url": "=https://graph.microsoft.com/v1.0/users/{{$node[\"HTTP Request\"].json.id}}",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "{\n  \"accountEnabled\": false\n}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.4,
+      "position": [
+        992,
+        48
+      ],
+      "id": "7bdb1e84-e34f-4607-a62b-81ed0b3aaa43",
+      "name": "HTTP Request4"
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "Webhook": {
+      "main": [
+        [
+          {
+            "node": "Normalization Output",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "If": {
+      "main": [
+        [
+          {
+            "node": "Assign IT Role",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "If1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "If1": {
+      "main": [
+        [
+          {
+            "node": "Assign HR Role",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Edit Fields3",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Normalization Output": {
+      "main": [
+        [
+          {
+            "node": "If",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Assign IT Role": {
+      "main": [
+        [
+          {
+            "node": "HTTP Request",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Assign HR Role": {
+      "main": [
+        [
+          {
+            "node": "HTTP Request1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "HTTP Request": {
+      "main": [
+        [
+          {
+            "node": "makepost",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "HTTP Request1": {
+      "main": [
+        [
+          {
+            "node": "HTTP Request3",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "HTTP Request3": {
+      "main": [
+        [
+          {
+            "node": "Wait1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Wait1": {
+      "main": [
+        [
+          {
+            "node": "HTTP Request4",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "makepost": {
+      "main": [
+        [
+          {
+            "node": "Wait",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Wait": {
+      "main": [
+        [
+          {
+            "node": "HTTP Request2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1",
+    "binaryMode": "separate"
+  },
+  "versionId": "c9ec77fd-4e0b-40fc-9c21-0e8263008a1a",
+  "meta": {
+    "instanceId": "9f9b9115edc273b50a59a57a4e4d6556ebc858391c3c81ec12836714ab9a5ef9"
+  },
+  "id": "ZV5PTjArS6Yylm4v",
+  "tags": []
+}
