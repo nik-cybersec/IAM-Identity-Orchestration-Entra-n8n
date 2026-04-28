@@ -114,9 +114,7 @@ IAM-Identity-Orchestration-Entra-n8n/
 
 ---
 
-## 🧾 Resume Highlight
 
-> Designed and implemented an automated identity lifecycle orchestration system integrating Microsoft Entra ID with n8n, enabling API-driven user provisioning, role-based access control, and automated deprovisioning workflows.
 
 ---
 
